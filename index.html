@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Important Question</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff5f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .box {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #noBtn {
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="step1">
+    <h2>Will you be my emergency contact? 🥺</h2>
+    <button onclick="showStep2()">YES</button>
+    <button id="noBtn" onmouseover="moveNo()">NO</button>
+  </div>
+
+  <div class="box" id="step2" style="display:none;">
+    <h2>You selected what you really mean? 😌</h2>
+    <button onclick="finalYes()">YES</button>
+    <button onclick="goBack()">NO</button>
+  </div>
+
+  <div class="box" id="final" style="display:none;">
+    <h2>Congratulations 💛</h2>
+    <p>You are officially my emergency contact.</p>
+  </div>
+
+<script>
+  function moveNo() {
+    const noBtn = document.getElementById("noBtn");
+    noBtn.style.top = Math.random() * window.innerHeight + "px";
+    noBtn.style.left = Math.random() * window.innerWidth + "px";
+  }
+
+  function showStep2() {
+    document.getElementById("step1").style.display = "none";
+    document.getElementById("step2").style.display = "block";
+  }
+
+  function goBack() {
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("step1").style.display = "block";
+  }
+
+  function finalYes() {
+    document.getElementById("step2").style.display = "none";
+    document.getElementById("final").style.display = "block";
+  }
+</script>
+</body>
+</html>
