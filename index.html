@@ -5,71 +5,131 @@
   <title>Important Question</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #fff5f8;
+      font-family: "Segoe UI", sans-serif;
+      background: #fff0f5;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      overflow: hidden;
     }
+
     .box {
       background: white;
       padding: 30px;
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 12px 35px rgba(0,0,0,0.15);
     }
+
+    h2 {
+      font-size: 18px;
+      line-height: 1.5;
+    }
+
     button {
-      padding: 10px 20px;
+      padding: 12px 18px;
       margin: 10px;
-      font-size: 16px;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
       cursor: pointer;
     }
-    #noBtn {
+
+    .yes {
+      background: #ff5c8a;
+      color: white;
+    }
+
+    .no {
+      background: #ddd;
+    }
+
+    #hoverNo {
       position: absolute;
     }
   </style>
 </head>
 
 <body>
-  <div class="box" id="step1">
-    <h2>Will you be my emergency contact? 🥺</h2>
-    <button onclick="showStep2()">YES</button>
-    <button id="noBtn" onmouseover="moveNo()">NO</button>
-  </div>
 
-  <div class="box" id="step2" style="display:none;">
-    <h2>You selected what you really mean? 😌</h2>
-    <button onclick="finalYes()">YES</button>
-    <button onclick="goBack()">NO</button>
-  </div>
+<!-- STEP 1 -->
+<div class="box" id="step1">
+  <h2>
+    My Office people has been asking some details for the employee's personal data,  
+    I'd like to have some help from yours to submit that data.  
+    Can you help me?
+  </h2>
 
-  <div class="box" id="final" style="display:none;">
-    <h2>Congratulations 💛</h2>
-    <p>You are officially my emergency contact.</p>
-  </div>
+  <button class="yes" onclick="goStep2()">
+    Is that even a question to ask me? 🤩
+  </button>
+
+  <button class="no" onclick="meanPopup()">
+    Never mind, Find someone else 🙄
+  </button>
+</div>
+
+<!-- STEP 2 -->
+<div class="box" id="step2" style="display:none;">
+  <h2>
+    My office HR Team wants to know what's my blood group which I already know,  
+    but they've also asked me about emergency contact,  
+    which I have no clue about…  
+    <br><br>
+    Will you be my emergency contact? 🥹
+  </h2>
+
+  <button class="yes" onclick="goStep3()">Yes!</button>
+  <button class="no" id="hoverNo" onmouseover="moveNo()">NO!</button>
+</div>
+
+<!-- STEP 3 -->
+<div class="box" id="step3" style="display:none;">
+  <h2>Malli aduguthunna… you mean what you are saying right? 🥺</h2>
+
+  <button class="yes" onclick="finalYes()">Yes</button>
+  <button class="no" onclick="finalNo()">No</button>
+</div>
+
+<!-- FINAL YES -->
+<div class="box" id="finalYesBox" style="display:none;">
+  <h2>Congratulations! 💛</h2>
+  <p>You’re now officially my emergency contact!</p>
+</div>
 
 <script>
-  function moveNo() {
-    const noBtn = document.getElementById("noBtn");
-    noBtn.style.top = Math.random() * window.innerHeight + "px";
-    noBtn.style.left = Math.random() * window.innerWidth + "px";
-  }
-
-  function showStep2() {
+  function goStep2() {
     document.getElementById("step1").style.display = "none";
     document.getElementById("step2").style.display = "block";
   }
 
-  function goBack() {
+  function meanPopup() {
+    alert("Such a mean guy you are 😡\nKateef inka meetho!");
+  }
+
+  function moveNo() {
+    const btn = document.getElementById("hoverNo");
+    btn.style.top = Math.random() * (window.innerHeight - 50) + "px";
+    btn.style.left = Math.random() * (window.innerWidth - 100) + "px";
+  }
+
+  function goStep3() {
     document.getElementById("step2").style.display = "none";
-    document.getElementById("step1").style.display = "block";
+    document.getElementById("step3").style.display = "block";
   }
 
   function finalYes() {
-    document.getElementById("step2").style.display = "none";
-    document.getElementById("final").style.display = "block";
+    document.getElementById("step3").style.display = "none";
+    document.getElementById("finalYesBox").style.display = "block";
+  }
+
+  function finalNo() {
+    alert("Okay bye… thank you for your time 😔");
   }
 </script>
+
 </body>
 </html>
